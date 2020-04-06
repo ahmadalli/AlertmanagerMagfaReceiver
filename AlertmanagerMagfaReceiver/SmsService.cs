@@ -64,6 +64,10 @@ namespace AlertmanagerMagfaReceiver
 
             if (resultCode.HasValue)
                 ensureSuccessResultCode(resultCode.Value);
+            else
+            {
+                _logger.LogWarning("enqueue method returned null result");
+            }
         }
 
         private static void ensureSuccessResultCode(long code)
