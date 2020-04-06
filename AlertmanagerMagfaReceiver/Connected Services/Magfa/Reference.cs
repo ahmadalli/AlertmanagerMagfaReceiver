@@ -13,80 +13,90 @@ namespace Magfa
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
     [System.ServiceModel.ServiceContractAttribute(Namespace="http://magfa.com/soap/SOAPSmsQueue", ConfigurationName="Magfa.SoapSmsQueuableImplementation")]
-    public interface SoapSmsQueuableImplementation
+    internal interface SoapSmsQueuableImplementation
     {
         
         [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(Style=System.ServiceModel.OperationFormatStyle.Rpc, SupportFaults=true, Use=System.ServiceModel.OperationFormatUse.Encoded)]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(CustomerReturnIncomingFormat))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeliveryStatus))]
-        System.Threading.Tasks.Task<Magfa.getDetailedStatusesResponse> getDetailedStatusesAsync(Magfa.getDetailedStatusesRequest request);
+        [return: System.ServiceModel.MessageParameterAttribute(Name="getMessageStatusReturn")]
+        System.Threading.Tasks.Task<int> getMessageStatusAsync(long messageId);
         
         [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(Style=System.ServiceModel.OperationFormatStyle.Rpc, SupportFaults=true, Use=System.ServiceModel.OperationFormatUse.Encoded)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(CustomerReturnIncomingFormat))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeliveryStatus))]
-        System.Threading.Tasks.Task<Magfa.getMessageStatusResponse> getMessageStatusAsync(Magfa.getMessageStatusRequest request);
+        [return: System.ServiceModel.MessageParameterAttribute(Name="getDetailedStatusesReturn")]
+        System.Threading.Tasks.Task<Magfa.DeliveryStatus[]> getDetailedStatusesAsync(string domain, long[] messagesId);
         
         [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(Style=System.ServiceModel.OperationFormatStyle.Rpc, SupportFaults=true, Use=System.ServiceModel.OperationFormatUse.Encoded)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(CustomerReturnIncomingFormat))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeliveryStatus))]
-        System.Threading.Tasks.Task<Magfa.getMessageIdResponse> getMessageIdAsync(Magfa.getMessageIdRequest request);
+        [return: System.ServiceModel.MessageParameterAttribute(Name="getMessageStatusesReturn")]
+        System.Threading.Tasks.Task<int[]> getMessageStatusesAsync(long[] messagesId);
         
         [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(Style=System.ServiceModel.OperationFormatStyle.Rpc, SupportFaults=true, Use=System.ServiceModel.OperationFormatUse.Encoded)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(CustomerReturnIncomingFormat))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeliveryStatus))]
-        System.Threading.Tasks.Task<Magfa.getMessageStatusesResponse> getMessageStatusesAsync(Magfa.getMessageStatusesRequest request);
+        [return: System.ServiceModel.MessageParameterAttribute(Name="getRealMessageStatusesReturn")]
+        System.Threading.Tasks.Task<int[]> getRealMessageStatusesAsync(long[] messagesId);
         
         [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(Style=System.ServiceModel.OperationFormatStyle.Rpc, SupportFaults=true, Use=System.ServiceModel.OperationFormatUse.Encoded)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(CustomerReturnIncomingFormat))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeliveryStatus))]
-        System.Threading.Tasks.Task<Magfa.getRealMessageStatusesResponse> getRealMessageStatusesAsync(Magfa.getRealMessageStatusesRequest request);
+        [return: System.ServiceModel.MessageParameterAttribute(Name="getAllMessagesWithNumberReturn")]
+        System.Threading.Tasks.Task<object[]> getAllMessagesWithNumberAsync(string domain, int numberOfMessages, string destNumber);
         
         [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(Style=System.ServiceModel.OperationFormatStyle.Rpc, SupportFaults=true, Use=System.ServiceModel.OperationFormatUse.Encoded)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(CustomerReturnIncomingFormat))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeliveryStatus))]
-        System.Threading.Tasks.Task<Magfa.getAllMessagesWithNumberResponse> getAllMessagesWithNumberAsync(Magfa.getAllMessagesWithNumberRequest request);
+        [return: System.ServiceModel.MessageParameterAttribute(Name="getMessagesWithNumberReturn")]
+        System.Threading.Tasks.Task<object[]> getMessagesWithNumberAsync(string domain, int numberOfMessages, string destNumber);
         
         [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(Style=System.ServiceModel.OperationFormatStyle.Rpc, SupportFaults=true, Use=System.ServiceModel.OperationFormatUse.Encoded)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(CustomerReturnIncomingFormat))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeliveryStatus))]
-        System.Threading.Tasks.Task<Magfa.getMessagesWithNumberResponse> getMessagesWithNumberAsync(Magfa.getMessagesWithNumberRequest request);
+        [return: System.ServiceModel.MessageParameterAttribute(Name="getCreditReturn")]
+        System.Threading.Tasks.Task<float> getCreditAsync(string domain);
         
         [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(Style=System.ServiceModel.OperationFormatStyle.Rpc, SupportFaults=true, Use=System.ServiceModel.OperationFormatUse.Encoded)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(CustomerReturnIncomingFormat))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeliveryStatus))]
-        System.Threading.Tasks.Task<Magfa.getCreditResponse> getCreditAsync(Magfa.getCreditRequest request);
+        [return: System.ServiceModel.MessageParameterAttribute(Name="getAllMessagesReturn")]
+        System.Threading.Tasks.Task<object[]> getAllMessagesAsync(string domain, int numberOfMessages);
         
         [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(Style=System.ServiceModel.OperationFormatStyle.Rpc, SupportFaults=true, Use=System.ServiceModel.OperationFormatUse.Encoded)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(CustomerReturnIncomingFormat))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeliveryStatus))]
-        System.Threading.Tasks.Task<Magfa.getAllMessagesResponse> getAllMessagesAsync(Magfa.getAllMessagesRequest request);
+        [return: System.ServiceModel.MessageParameterAttribute(Name="getMessagesReturn")]
+        System.Threading.Tasks.Task<object[]> getMessagesAsync(string domain, int numberOfMessages);
         
         [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(Style=System.ServiceModel.OperationFormatStyle.Rpc, SupportFaults=true, Use=System.ServiceModel.OperationFormatUse.Encoded)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(CustomerReturnIncomingFormat))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeliveryStatus))]
-        System.Threading.Tasks.Task<Magfa.getMessagesResponse> getMessagesAsync(Magfa.getMessagesRequest request);
+        [return: System.ServiceModel.MessageParameterAttribute(Name="enqueueWithGatewayReturn")]
+        System.Threading.Tasks.Task<long[]> enqueueWithGatewayAsync(string domain, string[] messageBodies, string[] recipientNumbers, string[] senderNumbers, int[] encodings, string[] udhs, int[] messageClasses, int[] priorities, long[] checkingMessageIds, string gateway);
         
         [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(Style=System.ServiceModel.OperationFormatStyle.Rpc, SupportFaults=true, Use=System.ServiceModel.OperationFormatUse.Encoded)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(CustomerReturnIncomingFormat))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeliveryStatus))]
-        System.Threading.Tasks.Task<Magfa.enqueueWithGatewayResponse> enqueueWithGatewayAsync(Magfa.enqueueWithGatewayRequest request);
+        [return: System.ServiceModel.MessageParameterAttribute(Name="getMessageIdReturn")]
+        System.Threading.Tasks.Task<long> getMessageIdAsync(string domain, long checkingMessageId);
         
         [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(Style=System.ServiceModel.OperationFormatStyle.Rpc, SupportFaults=true, Use=System.ServiceModel.OperationFormatUse.Encoded)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(CustomerReturnIncomingFormat))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeliveryStatus))]
-        System.Threading.Tasks.Task<Magfa.enqueueResponse> enqueueAsync(Magfa.enqueueRequest request);
+        [return: System.ServiceModel.MessageParameterAttribute(Name="enqueueReturn")]
+        System.Threading.Tasks.Task<long[]> enqueueAsync(string domain, string[] messageBodies, string[] recipientNumbers, string[] senderNumbers, int[] encodings, string[] udhs, int[] messageClasses, int[] priorities, long[] checkingMessageIds);
     }
     
     /// <remarks/>
@@ -225,570 +235,14 @@ namespace Magfa
         }
     }
     
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="getDetailedStatuses", WrapperNamespace="http://magfa.com/soap/SOAPSmsQueue", IsWrapped=true)]
-    public partial class getDetailedStatusesRequest
-    {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="", Order=0)]
-        public string domain;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="", Order=1)]
-        public long[] messagesId;
-        
-        public getDetailedStatusesRequest()
-        {
-        }
-        
-        public getDetailedStatusesRequest(string domain, long[] messagesId)
-        {
-            this.domain = domain;
-            this.messagesId = messagesId;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="getDetailedStatusesResponse", WrapperNamespace="http://magfa.com/soap/SOAPSmsQueue", IsWrapped=true)]
-    public partial class getDetailedStatusesResponse
-    {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="", Order=0)]
-        public Magfa.DeliveryStatus[] getDetailedStatusesReturn;
-        
-        public getDetailedStatusesResponse()
-        {
-        }
-        
-        public getDetailedStatusesResponse(Magfa.DeliveryStatus[] getDetailedStatusesReturn)
-        {
-            this.getDetailedStatusesReturn = getDetailedStatusesReturn;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="getMessageStatus", WrapperNamespace="http://magfa.com/soap/SOAPSmsQueue", IsWrapped=true)]
-    public partial class getMessageStatusRequest
-    {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="", Order=0)]
-        public long messageId;
-        
-        public getMessageStatusRequest()
-        {
-        }
-        
-        public getMessageStatusRequest(long messageId)
-        {
-            this.messageId = messageId;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="getMessageStatusResponse", WrapperNamespace="http://magfa.com/soap/SOAPSmsQueue", IsWrapped=true)]
-    public partial class getMessageStatusResponse
-    {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="", Order=0)]
-        public int getMessageStatusReturn;
-        
-        public getMessageStatusResponse()
-        {
-        }
-        
-        public getMessageStatusResponse(int getMessageStatusReturn)
-        {
-            this.getMessageStatusReturn = getMessageStatusReturn;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="getMessageId", WrapperNamespace="http://magfa.com/soap/SOAPSmsQueue", IsWrapped=true)]
-    public partial class getMessageIdRequest
-    {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="", Order=0)]
-        public string domain;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="", Order=1)]
-        public long checkingMessageId;
-        
-        public getMessageIdRequest()
-        {
-        }
-        
-        public getMessageIdRequest(string domain, long checkingMessageId)
-        {
-            this.domain = domain;
-            this.checkingMessageId = checkingMessageId;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="getMessageIdResponse", WrapperNamespace="http://magfa.com/soap/SOAPSmsQueue", IsWrapped=true)]
-    public partial class getMessageIdResponse
-    {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="", Order=0)]
-        public long getMessageIdReturn;
-        
-        public getMessageIdResponse()
-        {
-        }
-        
-        public getMessageIdResponse(long getMessageIdReturn)
-        {
-            this.getMessageIdReturn = getMessageIdReturn;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="getMessageStatuses", WrapperNamespace="http://magfa.com/soap/SOAPSmsQueue", IsWrapped=true)]
-    public partial class getMessageStatusesRequest
-    {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="", Order=0)]
-        public long[] messagesId;
-        
-        public getMessageStatusesRequest()
-        {
-        }
-        
-        public getMessageStatusesRequest(long[] messagesId)
-        {
-            this.messagesId = messagesId;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="getMessageStatusesResponse", WrapperNamespace="http://magfa.com/soap/SOAPSmsQueue", IsWrapped=true)]
-    public partial class getMessageStatusesResponse
-    {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="", Order=0)]
-        public int[] getMessageStatusesReturn;
-        
-        public getMessageStatusesResponse()
-        {
-        }
-        
-        public getMessageStatusesResponse(int[] getMessageStatusesReturn)
-        {
-            this.getMessageStatusesReturn = getMessageStatusesReturn;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="getRealMessageStatuses", WrapperNamespace="http://magfa.com/soap/SOAPSmsQueue", IsWrapped=true)]
-    public partial class getRealMessageStatusesRequest
-    {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="", Order=0)]
-        public long[] messagesId;
-        
-        public getRealMessageStatusesRequest()
-        {
-        }
-        
-        public getRealMessageStatusesRequest(long[] messagesId)
-        {
-            this.messagesId = messagesId;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="getRealMessageStatusesResponse", WrapperNamespace="http://magfa.com/soap/SOAPSmsQueue", IsWrapped=true)]
-    public partial class getRealMessageStatusesResponse
-    {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="", Order=0)]
-        public int[] getRealMessageStatusesReturn;
-        
-        public getRealMessageStatusesResponse()
-        {
-        }
-        
-        public getRealMessageStatusesResponse(int[] getRealMessageStatusesReturn)
-        {
-            this.getRealMessageStatusesReturn = getRealMessageStatusesReturn;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="getAllMessagesWithNumber", WrapperNamespace="http://magfa.com/soap/SOAPSmsQueue", IsWrapped=true)]
-    public partial class getAllMessagesWithNumberRequest
-    {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="", Order=0)]
-        public string domain;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="", Order=1)]
-        public int numberOfMessages;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="", Order=2)]
-        public string destNumber;
-        
-        public getAllMessagesWithNumberRequest()
-        {
-        }
-        
-        public getAllMessagesWithNumberRequest(string domain, int numberOfMessages, string destNumber)
-        {
-            this.domain = domain;
-            this.numberOfMessages = numberOfMessages;
-            this.destNumber = destNumber;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="getAllMessagesWithNumberResponse", WrapperNamespace="http://magfa.com/soap/SOAPSmsQueue", IsWrapped=true)]
-    public partial class getAllMessagesWithNumberResponse
-    {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="", Order=0)]
-        public object[] getAllMessagesWithNumberReturn;
-        
-        public getAllMessagesWithNumberResponse()
-        {
-        }
-        
-        public getAllMessagesWithNumberResponse(object[] getAllMessagesWithNumberReturn)
-        {
-            this.getAllMessagesWithNumberReturn = getAllMessagesWithNumberReturn;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="getMessagesWithNumber", WrapperNamespace="http://magfa.com/soap/SOAPSmsQueue", IsWrapped=true)]
-    public partial class getMessagesWithNumberRequest
-    {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="", Order=0)]
-        public string domain;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="", Order=1)]
-        public int numberOfMessages;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="", Order=2)]
-        public string destNumber;
-        
-        public getMessagesWithNumberRequest()
-        {
-        }
-        
-        public getMessagesWithNumberRequest(string domain, int numberOfMessages, string destNumber)
-        {
-            this.domain = domain;
-            this.numberOfMessages = numberOfMessages;
-            this.destNumber = destNumber;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="getMessagesWithNumberResponse", WrapperNamespace="http://magfa.com/soap/SOAPSmsQueue", IsWrapped=true)]
-    public partial class getMessagesWithNumberResponse
-    {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="", Order=0)]
-        public object[] getMessagesWithNumberReturn;
-        
-        public getMessagesWithNumberResponse()
-        {
-        }
-        
-        public getMessagesWithNumberResponse(object[] getMessagesWithNumberReturn)
-        {
-            this.getMessagesWithNumberReturn = getMessagesWithNumberReturn;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="getCredit", WrapperNamespace="http://magfa.com/soap/SOAPSmsQueue", IsWrapped=true)]
-    public partial class getCreditRequest
-    {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="", Order=0)]
-        public string domain;
-        
-        public getCreditRequest()
-        {
-        }
-        
-        public getCreditRequest(string domain)
-        {
-            this.domain = domain;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="getCreditResponse", WrapperNamespace="http://magfa.com/soap/SOAPSmsQueue", IsWrapped=true)]
-    public partial class getCreditResponse
-    {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="", Order=0)]
-        public float getCreditReturn;
-        
-        public getCreditResponse()
-        {
-        }
-        
-        public getCreditResponse(float getCreditReturn)
-        {
-            this.getCreditReturn = getCreditReturn;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="getAllMessages", WrapperNamespace="http://magfa.com/soap/SOAPSmsQueue", IsWrapped=true)]
-    public partial class getAllMessagesRequest
-    {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="", Order=0)]
-        public string domain;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="", Order=1)]
-        public int numberOfMessages;
-        
-        public getAllMessagesRequest()
-        {
-        }
-        
-        public getAllMessagesRequest(string domain, int numberOfMessages)
-        {
-            this.domain = domain;
-            this.numberOfMessages = numberOfMessages;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="getAllMessagesResponse", WrapperNamespace="http://magfa.com/soap/SOAPSmsQueue", IsWrapped=true)]
-    public partial class getAllMessagesResponse
-    {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="", Order=0)]
-        public object[] getAllMessagesReturn;
-        
-        public getAllMessagesResponse()
-        {
-        }
-        
-        public getAllMessagesResponse(object[] getAllMessagesReturn)
-        {
-            this.getAllMessagesReturn = getAllMessagesReturn;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="getMessages", WrapperNamespace="http://magfa.com/soap/SOAPSmsQueue", IsWrapped=true)]
-    public partial class getMessagesRequest
-    {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="", Order=0)]
-        public string domain;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="", Order=1)]
-        public int numberOfMessages;
-        
-        public getMessagesRequest()
-        {
-        }
-        
-        public getMessagesRequest(string domain, int numberOfMessages)
-        {
-            this.domain = domain;
-            this.numberOfMessages = numberOfMessages;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="getMessagesResponse", WrapperNamespace="http://magfa.com/soap/SOAPSmsQueue", IsWrapped=true)]
-    public partial class getMessagesResponse
-    {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="", Order=0)]
-        public object[] getMessagesReturn;
-        
-        public getMessagesResponse()
-        {
-        }
-        
-        public getMessagesResponse(object[] getMessagesReturn)
-        {
-            this.getMessagesReturn = getMessagesReturn;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="enqueueWithGateway", WrapperNamespace="http://magfa.com/soap/SOAPSmsQueue", IsWrapped=true)]
-    public partial class enqueueWithGatewayRequest
-    {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="", Order=0)]
-        public string domain;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="", Order=1)]
-        public string[] messageBodies;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="", Order=2)]
-        public string[] recipientNumbers;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="", Order=3)]
-        public string[] senderNumbers;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="", Order=4)]
-        public int[] encodings;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="", Order=5)]
-        public string[] udhs;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="", Order=6)]
-        public int[] messageClasses;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="", Order=7)]
-        public int[] priorities;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="", Order=8)]
-        public long[] checkingMessageIds;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="", Order=9)]
-        public string gateway;
-        
-        public enqueueWithGatewayRequest()
-        {
-        }
-        
-        public enqueueWithGatewayRequest(string domain, string[] messageBodies, string[] recipientNumbers, string[] senderNumbers, int[] encodings, string[] udhs, int[] messageClasses, int[] priorities, long[] checkingMessageIds, string gateway)
-        {
-            this.domain = domain;
-            this.messageBodies = messageBodies;
-            this.recipientNumbers = recipientNumbers;
-            this.senderNumbers = senderNumbers;
-            this.encodings = encodings;
-            this.udhs = udhs;
-            this.messageClasses = messageClasses;
-            this.priorities = priorities;
-            this.checkingMessageIds = checkingMessageIds;
-            this.gateway = gateway;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="enqueueWithGatewayResponse", WrapperNamespace="http://magfa.com/soap/SOAPSmsQueue", IsWrapped=true)]
-    public partial class enqueueWithGatewayResponse
-    {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="", Order=0)]
-        public long[] enqueueWithGatewayReturn;
-        
-        public enqueueWithGatewayResponse()
-        {
-        }
-        
-        public enqueueWithGatewayResponse(long[] enqueueWithGatewayReturn)
-        {
-            this.enqueueWithGatewayReturn = enqueueWithGatewayReturn;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="enqueue", WrapperNamespace="http://magfa.com/soap/SOAPSmsQueue", IsWrapped=true)]
-    public partial class enqueueRequest
-    {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="", Order=0)]
-        public string domain;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="", Order=1)]
-        public string[] messageBodies;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="", Order=2)]
-        public string[] recipientNumbers;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="", Order=3)]
-        public string[] senderNumbers;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="", Order=4)]
-        public int[] encodings;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="", Order=5)]
-        public string[] udhs;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="", Order=6)]
-        public int[] messageClasses;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="", Order=7)]
-        public int[] priorities;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="", Order=8)]
-        public long[] checkingMessageIds;
-        
-        public enqueueRequest()
-        {
-        }
-        
-        public enqueueRequest(string domain, string[] messageBodies, string[] recipientNumbers, string[] senderNumbers, int[] encodings, string[] udhs, int[] messageClasses, int[] priorities, long[] checkingMessageIds)
-        {
-            this.domain = domain;
-            this.messageBodies = messageBodies;
-            this.recipientNumbers = recipientNumbers;
-            this.senderNumbers = senderNumbers;
-            this.encodings = encodings;
-            this.udhs = udhs;
-            this.messageClasses = messageClasses;
-            this.priorities = priorities;
-            this.checkingMessageIds = checkingMessageIds;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="enqueueResponse", WrapperNamespace="http://magfa.com/soap/SOAPSmsQueue", IsWrapped=true)]
-    public partial class enqueueResponse
-    {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="", Order=0)]
-        public long[] enqueueReturn;
-        
-        public enqueueResponse()
-        {
-        }
-        
-        public enqueueResponse(long[] enqueueReturn)
-        {
-            this.enqueueReturn = enqueueReturn;
-        }
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
-    public interface SoapSmsQueuableImplementationChannel : Magfa.SoapSmsQueuableImplementation, System.ServiceModel.IClientChannel
+    internal interface SoapSmsQueuableImplementationChannel : Magfa.SoapSmsQueuableImplementation, System.ServiceModel.IClientChannel
     {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
-    public partial class SoapSmsQueuableImplementationClient : System.ServiceModel.ClientBase<Magfa.SoapSmsQueuableImplementation>, Magfa.SoapSmsQueuableImplementation
+    internal partial class SoapSmsQueuableImplementationClient : System.ServiceModel.ClientBase<Magfa.SoapSmsQueuableImplementation>, Magfa.SoapSmsQueuableImplementation
     {
         
         /// <summary>
@@ -831,64 +285,64 @@ namespace Magfa
         {
         }
         
-        public System.Threading.Tasks.Task<Magfa.getDetailedStatusesResponse> getDetailedStatusesAsync(Magfa.getDetailedStatusesRequest request)
+        public System.Threading.Tasks.Task<int> getMessageStatusAsync(long messageId)
         {
-            return base.Channel.getDetailedStatusesAsync(request);
+            return base.Channel.getMessageStatusAsync(messageId);
         }
         
-        public System.Threading.Tasks.Task<Magfa.getMessageStatusResponse> getMessageStatusAsync(Magfa.getMessageStatusRequest request)
+        public System.Threading.Tasks.Task<Magfa.DeliveryStatus[]> getDetailedStatusesAsync(string domain, long[] messagesId)
         {
-            return base.Channel.getMessageStatusAsync(request);
+            return base.Channel.getDetailedStatusesAsync(domain, messagesId);
         }
         
-        public System.Threading.Tasks.Task<Magfa.getMessageIdResponse> getMessageIdAsync(Magfa.getMessageIdRequest request)
+        public System.Threading.Tasks.Task<int[]> getMessageStatusesAsync(long[] messagesId)
         {
-            return base.Channel.getMessageIdAsync(request);
+            return base.Channel.getMessageStatusesAsync(messagesId);
         }
         
-        public System.Threading.Tasks.Task<Magfa.getMessageStatusesResponse> getMessageStatusesAsync(Magfa.getMessageStatusesRequest request)
+        public System.Threading.Tasks.Task<int[]> getRealMessageStatusesAsync(long[] messagesId)
         {
-            return base.Channel.getMessageStatusesAsync(request);
+            return base.Channel.getRealMessageStatusesAsync(messagesId);
         }
         
-        public System.Threading.Tasks.Task<Magfa.getRealMessageStatusesResponse> getRealMessageStatusesAsync(Magfa.getRealMessageStatusesRequest request)
+        public System.Threading.Tasks.Task<object[]> getAllMessagesWithNumberAsync(string domain, int numberOfMessages, string destNumber)
         {
-            return base.Channel.getRealMessageStatusesAsync(request);
+            return base.Channel.getAllMessagesWithNumberAsync(domain, numberOfMessages, destNumber);
         }
         
-        public System.Threading.Tasks.Task<Magfa.getAllMessagesWithNumberResponse> getAllMessagesWithNumberAsync(Magfa.getAllMessagesWithNumberRequest request)
+        public System.Threading.Tasks.Task<object[]> getMessagesWithNumberAsync(string domain, int numberOfMessages, string destNumber)
         {
-            return base.Channel.getAllMessagesWithNumberAsync(request);
+            return base.Channel.getMessagesWithNumberAsync(domain, numberOfMessages, destNumber);
         }
         
-        public System.Threading.Tasks.Task<Magfa.getMessagesWithNumberResponse> getMessagesWithNumberAsync(Magfa.getMessagesWithNumberRequest request)
+        public System.Threading.Tasks.Task<float> getCreditAsync(string domain)
         {
-            return base.Channel.getMessagesWithNumberAsync(request);
+            return base.Channel.getCreditAsync(domain);
         }
         
-        public System.Threading.Tasks.Task<Magfa.getCreditResponse> getCreditAsync(Magfa.getCreditRequest request)
+        public System.Threading.Tasks.Task<object[]> getAllMessagesAsync(string domain, int numberOfMessages)
         {
-            return base.Channel.getCreditAsync(request);
+            return base.Channel.getAllMessagesAsync(domain, numberOfMessages);
         }
         
-        public System.Threading.Tasks.Task<Magfa.getAllMessagesResponse> getAllMessagesAsync(Magfa.getAllMessagesRequest request)
+        public System.Threading.Tasks.Task<object[]> getMessagesAsync(string domain, int numberOfMessages)
         {
-            return base.Channel.getAllMessagesAsync(request);
+            return base.Channel.getMessagesAsync(domain, numberOfMessages);
         }
         
-        public System.Threading.Tasks.Task<Magfa.getMessagesResponse> getMessagesAsync(Magfa.getMessagesRequest request)
+        public System.Threading.Tasks.Task<long[]> enqueueWithGatewayAsync(string domain, string[] messageBodies, string[] recipientNumbers, string[] senderNumbers, int[] encodings, string[] udhs, int[] messageClasses, int[] priorities, long[] checkingMessageIds, string gateway)
         {
-            return base.Channel.getMessagesAsync(request);
+            return base.Channel.enqueueWithGatewayAsync(domain, messageBodies, recipientNumbers, senderNumbers, encodings, udhs, messageClasses, priorities, checkingMessageIds, gateway);
         }
         
-        public System.Threading.Tasks.Task<Magfa.enqueueWithGatewayResponse> enqueueWithGatewayAsync(Magfa.enqueueWithGatewayRequest request)
+        public System.Threading.Tasks.Task<long> getMessageIdAsync(string domain, long checkingMessageId)
         {
-            return base.Channel.enqueueWithGatewayAsync(request);
+            return base.Channel.getMessageIdAsync(domain, checkingMessageId);
         }
         
-        public System.Threading.Tasks.Task<Magfa.enqueueResponse> enqueueAsync(Magfa.enqueueRequest request)
+        public System.Threading.Tasks.Task<long[]> enqueueAsync(string domain, string[] messageBodies, string[] recipientNumbers, string[] senderNumbers, int[] encodings, string[] udhs, int[] messageClasses, int[] priorities, long[] checkingMessageIds)
         {
-            return base.Channel.enqueueAsync(request);
+            return base.Channel.enqueueAsync(domain, messageBodies, recipientNumbers, senderNumbers, encodings, udhs, messageClasses, priorities, checkingMessageIds);
         }
         
         public virtual System.Threading.Tasks.Task OpenAsync()
@@ -910,6 +364,7 @@ namespace Magfa
                 result.ReaderQuotas = System.Xml.XmlDictionaryReaderQuotas.Max;
                 result.MaxReceivedMessageSize = int.MaxValue;
                 result.AllowCookies = true;
+                result.Security.Mode = System.ServiceModel.BasicHttpSecurityMode.Transport;
                 return result;
             }
             throw new System.InvalidOperationException(string.Format("Could not find endpoint with name \'{0}\'.", endpointConfiguration));
@@ -919,7 +374,7 @@ namespace Magfa
         {
             if ((endpointConfiguration == EndpointConfiguration.TSOAP))
             {
-                return new System.ServiceModel.EndpointAddress("http://sms.magfa.com/services/urn:SOAPSmsQueue");
+                return new System.ServiceModel.EndpointAddress("https://sms.magfa.com/services/urn:SOAPSmsQueue");
             }
             throw new System.InvalidOperationException(string.Format("Could not find endpoint with name \'{0}\'.", endpointConfiguration));
         }
