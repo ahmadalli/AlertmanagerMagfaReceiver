@@ -25,6 +25,8 @@ namespace AlertmanagerMagfaReceiver
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddSingleton<SMSService>();
+            services.Configure<MagfaConfigs>(Configuration.GetSection("Magfa"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
