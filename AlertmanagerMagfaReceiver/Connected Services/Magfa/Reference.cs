@@ -18,6 +18,15 @@ namespace Magfa
         
         [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(Style=System.ServiceModel.OperationFormatStyle.Rpc, SupportFaults=true, Use=System.ServiceModel.OperationFormatUse.Encoded)]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(CustomerReturnIncomingFormat))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeliveryStatus))]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="getDetailedStatusesReturn")]
+        System.Threading.Tasks.Task<Magfa.DeliveryStatus[]> getDetailedStatusesAsync(string domain, long[] messagesId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(Style=System.ServiceModel.OperationFormatStyle.Rpc, SupportFaults=true, Use=System.ServiceModel.OperationFormatUse.Encoded)]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(CustomerReturnIncomingFormat))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeliveryStatus))]
         [return: System.ServiceModel.MessageParameterAttribute(Name="getMessageStatusReturn")]
         System.Threading.Tasks.Task<int> getMessageStatusAsync(long messageId);
         
@@ -25,8 +34,8 @@ namespace Magfa
         [System.ServiceModel.XmlSerializerFormatAttribute(Style=System.ServiceModel.OperationFormatStyle.Rpc, SupportFaults=true, Use=System.ServiceModel.OperationFormatUse.Encoded)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(CustomerReturnIncomingFormat))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeliveryStatus))]
-        [return: System.ServiceModel.MessageParameterAttribute(Name="getDetailedStatusesReturn")]
-        System.Threading.Tasks.Task<Magfa.DeliveryStatus[]> getDetailedStatusesAsync(string domain, long[] messagesId);
+        [return: System.ServiceModel.MessageParameterAttribute(Name="getMessageIdReturn")]
+        System.Threading.Tasks.Task<long> getMessageIdAsync(string domain, long checkingMessageId);
         
         [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(Style=System.ServiceModel.OperationFormatStyle.Rpc, SupportFaults=true, Use=System.ServiceModel.OperationFormatUse.Encoded)]
@@ -83,13 +92,6 @@ namespace Magfa
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeliveryStatus))]
         [return: System.ServiceModel.MessageParameterAttribute(Name="enqueueWithGatewayReturn")]
         System.Threading.Tasks.Task<long[]> enqueueWithGatewayAsync(string domain, string[] messageBodies, string[] recipientNumbers, string[] senderNumbers, int[] encodings, string[] udhs, int[] messageClasses, int[] priorities, long[] checkingMessageIds, string gateway);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(Style=System.ServiceModel.OperationFormatStyle.Rpc, SupportFaults=true, Use=System.ServiceModel.OperationFormatUse.Encoded)]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(CustomerReturnIncomingFormat))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DeliveryStatus))]
-        [return: System.ServiceModel.MessageParameterAttribute(Name="getMessageIdReturn")]
-        System.Threading.Tasks.Task<long> getMessageIdAsync(string domain, long checkingMessageId);
         
         [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(Style=System.ServiceModel.OperationFormatStyle.Rpc, SupportFaults=true, Use=System.ServiceModel.OperationFormatUse.Encoded)]
@@ -285,14 +287,19 @@ namespace Magfa
         {
         }
         
+        public System.Threading.Tasks.Task<Magfa.DeliveryStatus[]> getDetailedStatusesAsync(string domain, long[] messagesId)
+        {
+            return base.Channel.getDetailedStatusesAsync(domain, messagesId);
+        }
+        
         public System.Threading.Tasks.Task<int> getMessageStatusAsync(long messageId)
         {
             return base.Channel.getMessageStatusAsync(messageId);
         }
         
-        public System.Threading.Tasks.Task<Magfa.DeliveryStatus[]> getDetailedStatusesAsync(string domain, long[] messagesId)
+        public System.Threading.Tasks.Task<long> getMessageIdAsync(string domain, long checkingMessageId)
         {
-            return base.Channel.getDetailedStatusesAsync(domain, messagesId);
+            return base.Channel.getMessageIdAsync(domain, checkingMessageId);
         }
         
         public System.Threading.Tasks.Task<int[]> getMessageStatusesAsync(long[] messagesId)
@@ -333,11 +340,6 @@ namespace Magfa
         public System.Threading.Tasks.Task<long[]> enqueueWithGatewayAsync(string domain, string[] messageBodies, string[] recipientNumbers, string[] senderNumbers, int[] encodings, string[] udhs, int[] messageClasses, int[] priorities, long[] checkingMessageIds, string gateway)
         {
             return base.Channel.enqueueWithGatewayAsync(domain, messageBodies, recipientNumbers, senderNumbers, encodings, udhs, messageClasses, priorities, checkingMessageIds, gateway);
-        }
-        
-        public System.Threading.Tasks.Task<long> getMessageIdAsync(string domain, long checkingMessageId)
-        {
-            return base.Channel.getMessageIdAsync(domain, checkingMessageId);
         }
         
         public System.Threading.Tasks.Task<long[]> enqueueAsync(string domain, string[] messageBodies, string[] recipientNumbers, string[] senderNumbers, int[] encodings, string[] udhs, int[] messageClasses, int[] priorities, long[] checkingMessageIds)
