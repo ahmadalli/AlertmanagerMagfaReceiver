@@ -22,6 +22,9 @@ namespace AlertmanagerMagfaReceiver
         {
             _optionsMonitor = optionsMonitor;
             _logger = logger;
+
+            _optionsMonitor.OnChange(initClient);
+            initClient(_optionsMonitor.CurrentValue);
         }
 
         private void initClient(MagfaConfigs configs)
