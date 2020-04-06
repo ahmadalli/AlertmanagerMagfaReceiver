@@ -2,9 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Reflection;
+using System.ServiceModel;
+using System.ServiceModel.Channels;
 using System.ServiceModel.Description;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 using Magfa;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -29,24 +33,37 @@ namespace AlertmanagerMagfaReceiver
 
         private void initClient(MagfaConfigs configs)
         {
-            _smsQueueClient = new SoapSmsQueuableImplementationClient();
+            var binding = new BasicHttpBinding(BasicHttpSecurityMode.Transport);
+            binding.Security.Transport.ClientCredentialType = HttpClientCredentialType.Basic;
+
+            const int integerMaxValue = int.MaxValue;
+            binding.MaxBufferSize = integerMaxValue;
+            binding.MaxReceivedMessageSize = integerMaxValue;
+            binding.ReaderQuotas = System.Xml.XmlDictionaryReaderQuotas.Max;
+            binding.AllowCookies = true;
+
+            binding.ReceiveTimeout = TimeSpan.FromSeconds(10);
+            binding.SendTimeout = TimeSpan.FromSeconds(10);
+            binding.OpenTimeout = TimeSpan.FromSeconds(10);
+            binding.CloseTimeout = TimeSpan.FromSeconds(10);
+
+            _smsQueueClient = new SoapSmsQueuableImplementationClient(binding, new EndpointAddress("https://sms.magfa.com/services/urn:SOAPSmsQueue"));
+            _smsQueueClient.ChannelFactory.Credentials.UserName.UserName = configs.Username;
+            _smsQueueClient.ChannelFactory.Credentials.UserName.Password = configs.Password;
+
             _smsQueueClient.ClientCredentials.UserName.UserName = configs.Username;
             _smsQueueClient.ClientCredentials.UserName.Password = configs.Password;
         }
 
         public async Task SendSms(string text, string[] recipients)
         {
-            var request = new enqueueRequest()
-            {
-                domain = _optionsMonitor.CurrentValue.Domain,
-                senderNumbers = new[] { _optionsMonitor.CurrentValue.SenderNumber },
-                recipientNumbers = recipients,
-                messageBodies = new[] { text },
-                checkingMessageIds = new[] { _optionsMonitor.CurrentValue.CheckingMessageId }
-            };
+            var result = await _smsQueueClient.enqueueAsync(_optionsMonitor.CurrentValue.Domain, new[] { text },
+                recipients, new[] { _optionsMonitor.CurrentValue.SenderNumber }, new int[0], new string[0], new int[0],
+                new int[0], new[] { _optionsMonitor.CurrentValue.CheckingMessageId });
+            var resultCode = result?[0];
 
-            var resultCode = (await _smsQueueClient.enqueueAsync(request)).enqueueReturn[0];
-            ensureSuccessResultCode(resultCode);
+            if (resultCode.HasValue)
+                ensureSuccessResultCode(resultCode.Value);
         }
 
         private static void ensureSuccessResultCode(long code)
