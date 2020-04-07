@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
 namespace AlertmanagerMagfaReceiver.Controllers
@@ -13,11 +14,13 @@ namespace AlertmanagerMagfaReceiver.Controllers
     {
         private readonly SmsService _smsService;
         private readonly IOptionsMonitor<MagfaConfigs> _optionsMonitor;
+        private readonly ILogger<AlertController> _logger;
 
-        public AlertController(SmsService smsService, IOptionsMonitor<MagfaConfigs> optionsMonitor)
+        public AlertController(SmsService smsService, IOptionsMonitor<MagfaConfigs> optionsMonitor, ILogger<AlertController> logger)
         {
             _smsService = smsService;
             _optionsMonitor = optionsMonitor;
+            _logger = logger;
         }
 
         [HttpGet("test")]
@@ -31,7 +34,8 @@ namespace AlertmanagerMagfaReceiver.Controllers
         public async Task Alert([FromBody] WebhookPayload payload)
         {
             var tasks = new List<Task>();
-
+            _logger.LogInformation($"sending sms for {payload.Alerts.Count} alerts");
+            
             foreach (var payloadAlert in payload.Alerts)
             {
                 var message =

@@ -57,6 +57,9 @@ namespace AlertmanagerMagfaReceiver
 
         public async Task SendSms(string text, string[] recipients)
         {
+
+            _logger.LogDebug($"sending sms with message {text} to {string.Join(", ", recipients)}");
+
             var result = await _smsQueueClient.enqueueAsync(_optionsMonitor.CurrentValue.Domain, new[] { text },
                 recipients, new[] { _optionsMonitor.CurrentValue.SenderNumber }, new int[0], new string[0], new int[0],
                 new int[0], new[] { _optionsMonitor.CurrentValue.CheckingMessageId });
