@@ -60,9 +60,15 @@ namespace AlertmanagerMagfaReceiver
 
             _logger.LogDebug($"sending sms with message {text} to {string.Join(", ", recipients)}");
 
+            var checkMessageId = _optionsMonitor.CurrentValue.CheckingMessageId.HasValue
+                ? new[] { _optionsMonitor.CurrentValue.CheckingMessageId.Value }
+                : new long[0];
+
             var result = await _smsQueueClient.enqueueAsync(_optionsMonitor.CurrentValue.Domain, new[] { text },
-                recipients, new[] { _optionsMonitor.CurrentValue.SenderNumber }, new int[0], new string[0], new int[0],
-                new int[0], new[] { _optionsMonitor.CurrentValue.CheckingMessageId });
+                recipients, new[] { _optionsMonitor.CurrentValue.SenderNumber },
+                new[] { _optionsMonitor.CurrentValue.Encoding }, new string[0],
+                new[] { _optionsMonitor.CurrentValue.MessageClass }, new[] { _optionsMonitor.CurrentValue.Priority },
+                checkMessageId);
             var resultCode = result?[0];
 
             if (resultCode.HasValue)
